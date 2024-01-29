@@ -46,16 +46,21 @@ Tache tache[100];
 void AjouterTache()
 {   
     tache[i].idTache=tache[i-1].idTache+1;
-	printf("\t Responsable du tache : ");
+	printf("\n\tResponsable du tache : ");
 	scanf(" %[^\n]s",&tache[i].responsable);
    
-	printf("\t Description du tache : ");
+	printf("\tDescription du tache : ");
 	scanf(" %[^\n]s",&tache[i].description);
 
-    printf("\t Date d' echeance du tache : ");
-	scanf(" %d %d %d",&tache[i].dateEcheance.jour,&tache[i].dateEcheance.mois,&tache[i].dateEcheance.annee);
+    printf("\tDate d echeance du tache : \n");
+	printf("\t\tAnnee : ");
+	scanf("%d",&tache[i].dateEcheance.annee);
+	printf("\t\tMois : ");
+	scanf("%d",&tache[i].dateEcheance.mois);
+	printf("\t\tJour : ");
+	scanf("%d",&tache[i].dateEcheance.jour);
 
-	printf("\t La priorite du tache : ");
+	printf("\tLa priorite du tache : ");
 	scanf(" %[^\n]s",&tache[i].priorite);	
 
 	printf("L' ajout est effectue avec succes !!\n\n");
@@ -96,8 +101,8 @@ void SupprimerTache(){
 	}
 	if(istach==false)
 	{
-		printf("Tache introuvable !! Ressayer..\n\n\n");
-		SupprimerTache();
+		printf("Tache introuvable !! \n\n\n");
+		AfficherMenu();	
 	}
 	printf("La suppression est effectue avec succes !!\n\n");
 	i--;
@@ -132,19 +137,24 @@ void ModifierTache(){
 			    switch(info)
 			    {
 			    	case 1:
-			    		printf("\t Responsable du tache : ");
+			    		printf("\tResponsable du tache : ");
               	        scanf(" %[^\n]s",&tache[j].responsable);
 			    		break;
 			    	case 2:
-			    		printf("\t Description du tache : ");
+			    		printf("\tDescription du tache : ");
 	                    scanf(" %[^\n]s",&tache[j].description);
 			    		break;
 			    	case 3:
-			    		printf("\t Date d' echeance du tache : ");
-	                    scanf(" %d %d %d",&tache[j].dateEcheance.jour,&tache[j].dateEcheance.mois,&tache[j].dateEcheance.annee);
+			    		printf("\tDate d' echeance du tache : \n");
+	                    printf("\t\t\tAnnee : ");
+	                    scanf("%d",&tache[j].dateEcheance.annee);
+	                    printf("\t\t\tMois : ");
+	                    scanf("%d",&tache[j].dateEcheance.mois);
+	                    printf("\t\t\tJour : ");
+	                    scanf("%d",&tache[j].dateEcheance.jour);
 			    		break;
 			    	case 4:
-			    		printf("\t La priorite du tache : ");
+			    		printf("\tLa priorite du tache : ");
             	        scanf(" %[^\n]s",&tache[j].priorite);
 			    		break;
 			    	default :
@@ -165,7 +175,7 @@ void ModifierTache(){
 
 void TrierTaches(){
 	int ordre;
-	printf("De Quelle ordre voulez- vous trier les taches ?\n");
+	printf("\nDe Quelle ordre voulez- vous trier les taches ?\n");
 	
 	printf("\t1- Croissant .\n");
     printf("\t2- Decroissant .\n");
@@ -181,8 +191,8 @@ void TrierTaches(){
 			OrdreDecroissant();
 			break;
 		default :
-			printf("CHOIX INVALID !! Ressayer..");
-    		TrierTaches();
+			printf("CHOIX INVALID !! Ressayer..\n\n");
+    		AfficherMenu();	
 	   		break;
 	}
 }
@@ -376,7 +386,7 @@ void OrdreDecroissant(){
 
 void Filtrertache(){
 	int filtre;
-	printf("Filtrer Par :\n");
+	printf("\nFiltrer Par :\n");
 	printf("\t1- Numero .\n");
 	printf("\t2- Responsable .\n");
 	printf("\t3- Date d echeance .\n");
@@ -433,15 +443,15 @@ void Filtreid(){
 	}
 	for(j=0;j<k;j++){
     	printf("Tache %d :\n",j+1);
-    	printf("\t Numero du tache : ");
+    	printf("\t\tNumero du tache : ");
         printf(" %d\n",Filtrage[j].idTache);
-        printf("\t Responsable du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tResponsable du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].responsable);
-        printf("\t Description du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDescription du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].description);
-        printf("\t Date d' echeance du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDate d' echeance du tache %d : ",Filtrage[j].idTache);
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
-        printf("\tLa priorite du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
 	}
 	printf("\n\n\n\n");
@@ -474,16 +484,16 @@ void FiltreResponsable(){
 		Filtrertache();
 	}
 	for(j=0;j<k;j++){
-    	printf("Tache %d :\n",j+1);
-    	printf("\t Numero du tache : ");
+    	printf("\tTache %d :\n",j+1);
+    	printf("\t\tNumero du tache : ");
         printf(" %d\n",Filtrage[j].idTache);
-        printf("\t Responsable du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tResponsable du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].responsable);
-        printf("\t Description du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDescription du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].description);
-        printf("\t Date d' echeance du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDate d' echeance du tache %d : ",Filtrage[j].idTache);
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
-        printf("\tLa priorite du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
 	}
 	printf("\n\n\n\n");
@@ -555,19 +565,19 @@ void FiltreDateEcheance(){
 		Filtrertache();
 	}
 	for(j=0;j<k;j++){
-    	printf("Tache %d :\n",j+1);
-    	printf("\t Numero du tache : ");
+    	printf("\tTache %d :\n",j+1);
+    	printf("\t\tNumero du tache : ");
         printf(" %d\n",Filtrage[j].idTache);
-        printf("\t Responsable du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tResponsable du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].responsable);
-        printf("\t Description du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDescription du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].description);
-        printf("\t Date d' echeance du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDate d' echeance du tache %d : ",Filtrage[j].idTache);
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
-        printf("\tLa priorite du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
 	}
-	printf("\n\n\n\n");
+	printf("\n\n\n");
 	AfficherMenu();	
 }
 
@@ -599,19 +609,19 @@ void FiltrePriorite(){
 		Filtrertache();
 	}
 	for(j=0;j<k;j++){
-    	printf("Tache %d :\n",j+1);
-    	printf("\t Numero du tache : ");
+    	printf("\tTache %d :\n",j+1);
+    	printf("\t\tNumero du tache : ");
         printf(" %d\n",Filtrage[j].idTache);
-        printf("\t Responsable du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tResponsable du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].responsable);
-        printf("\t Description du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDescription du tache %d : ",Filtrage[j].idTache);
         printf(" %s\n",Filtrage[j].description);
-        printf("\t Date d' echeance du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tDate d' echeance du tache %d : ",Filtrage[j].idTache);
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
-        printf("\tLa priorite du tache %d : ",Filtrage[j].idTache);
+        printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
 	}
-	printf("\n\n\n\n");
+	printf("\n\n\n");
 	AfficherMenu();	
 }
 
@@ -662,21 +672,21 @@ void AfficherTaches(Tache t[]){
 	int j=0;
 	
 	
-	printf("Voila les taches disponible a ce moment la :\n\n");
+	printf("\nVoila les taches disponible a ce moment la :\n\n");
     for(j=0;j<i;j++){
-    	printf("Tache %d :\n",j+1);
-    	printf("\t Numero du tache : ");
+    	printf("\tTache %d :\n",j+1);
+    	printf("\t\tNumero du tache : ");
         printf(" %d\n",t[j].idTache);
-        printf("\t Responsable du tache %d : ",t[j].idTache);
+        printf("\t\tResponsable du tache %d : ",t[j].idTache);
         printf(" %s\n",t[j].responsable);
-        printf("\t Description du tache %d : ",t[j].idTache);
+        printf("\t\tDescription du tache %d : ",t[j].idTache);
         printf(" %s\n",t[j].description);
-        printf("\t Date d' echeance du tache %d : ",t[j].idTache);
+        printf("\t\tDate d' echeance du tache %d : ",t[j].idTache);
         printf(" %d/%d/%d\n",t[j].dateEcheance.jour,t[j].dateEcheance.mois,t[j].dateEcheance.annee);
-        printf("\tLa priorite du tache %d : ",t[j].idTache);
+        printf("\t\tLa priorite du tache %d : ",t[j].idTache);
 	    printf(" %s\n",t[j].priorite);
 	}
-	printf("\n\n\n\n");
+	printf("\n\n\n");
 	AfficherMenu();	
 }
 
