@@ -23,7 +23,7 @@ void ChoixOperation(int nombre);
 void AfficherTaches();
 void AjouterTache();
 void SupprimerTache();
-
+void ModifierTache();
 
 
 
@@ -94,6 +94,64 @@ void SupprimerTache(){
 	AfficherMenu();
 }
 
+void ModifierTache(){
+	int nbrtache,j,info;
+	bool istach = false ;
+	printf("Quelle Tache Voulez-vous Modifier ?\n");
+	scanf("%d",&nbrtache);
+	
+	while(nbrtache<0)
+	{
+		printf("Tache introuvable !! \n\n\n");
+		AfficherMenu();
+	}
+	
+	for(j=0;j<i;j++)
+	{
+		    if(tache[j].idTache==nbrtache)
+		    {
+		    	istach=true;
+		    	printf("Quelle information voulez-vous modifier ?\n");
+		    	printf("\t1- Responsable .\n");
+             	printf("\t2- Description .\n");
+	            printf("\t3- Date d echeance .\n");
+	            printf("\t4- Priorite .\n");
+				scanf("%d",&info);
+			    
+				printf("Tache %d :",tache[j].idTache);
+			    switch(info)
+			    {
+			    	case 1:
+			    		printf("\t Responsable du tache : ");
+              	        scanf(" %[^\n]s",&tache[j].responsable);
+			    		break;
+			    	case 2:
+			    		printf("\t Description du tache : ");
+	                    scanf(" %[^\n]s",&tache[j].description);
+			    		break;
+			    	case 3:
+			    		printf("\t Date d' echeance du tache : ");
+	                    scanf(" %d %d %d",&tache[j].dateEcheance.jour,&tache[j].dateEcheance.mois,&tache[j].dateEcheance.annee);
+			    		break;
+			    	case 4:
+			    		printf("\t La priorite du tache : ");
+            	        scanf(" %[^\n]s",&tache[j].priorite);
+			    		break;
+			    	default :
+			    		printf("CHOIX INVALID !! Ressayer..\n\n\n");
+			    		ModifierTache();
+			    		break;
+				}
+		   }	
+	}
+	if(istach==false)
+	{
+		printf("Tache introuvable !! \n\n\n");
+		AfficherMenu();
+	}
+	printf("La Modification est effectue avec succes !!\n\n");
+	AfficherMenu();
+}
 
 void ChoixOperation(int nombre)
 {
