@@ -16,6 +16,7 @@ typedef struct{
 	char description[30];
 	date dateEcheance;
 	char priorite[30];
+	char statut[30];
 }Tache;
 
 
@@ -35,7 +36,7 @@ void FiltreResponsable();
 void FiltreDescription();
 void FiltreDateEcheance();
 void FiltrePriorite();
-
+void FiltreStatut();
 
 
 int i=0,nombre;
@@ -45,7 +46,13 @@ Tache tache[100];
 
 void AjouterTache()
 {   
-    tache[i].idTache=tache[i-1].idTache+1;
+    if(i==0)
+    {
+    	tache[i].idTache=1;
+	}
+	else{
+		tache[i].idTache=tache[i-1].idTache+1;
+	}
 	printf("\n\tResponsable du tache : ");
 	scanf(" %[^\n]s",&tache[i].responsable);
    
@@ -61,7 +68,16 @@ void AjouterTache()
 	scanf("%d",&tache[i].dateEcheance.jour);
 
 	printf("\tLa priorite du tache : ");
-	scanf(" %[^\n]s",&tache[i].priorite);	
+	scanf(" %[^\n]s",&tache[i].priorite);
+	
+	printf("\tStatut du tache (Complete/Incomplete): ");
+	scanf(" %[^\n]s",&tache[i].statut);
+	
+	while(strcmp(tache[i].statut,"INCOMPLETE")!=0&&strcmp(tache[i].statut,"COMPLETE")!=0)
+	{
+		printf("\tStatut du tache (Complete/Incomplete): ");
+	    scanf(" %[^\n]s",&tache[i].statut);
+	}
 
 	printf("L' ajout est effectue avec succes !!\n\n");
 	i++;
@@ -97,6 +113,7 @@ void SupprimerTache(){
 		        tache[j].dateEcheance.mois=tache[j+1].dateEcheance.mois;
 		        tache[j].dateEcheance.annee=tache[j+1].dateEcheance.annee;
 		        strcpy(tache[j].priorite,tache[j+1].priorite);
+		        strcpy(tache[j].statut,tache[j+1].statut);
 		   }	
 	}
 	if(istach==false)
@@ -131,6 +148,8 @@ void ModifierTache(){
              	printf("\t2- Description .\n");
 	            printf("\t3- Date d echeance .\n");
 	            printf("\t4- Priorite .\n");
+	            printf("\t5- Statut .\n");
+
 				scanf("%d",&info);
 			    
 				printf("Tache %d :",tache[j].idTache);
@@ -156,6 +175,15 @@ void ModifierTache(){
 			    	case 4:
 			    		printf("\tLa priorite du tache : ");
             	        scanf(" %[^\n]s",&tache[j].priorite);
+			    		break;
+			    	case 5:
+			    		printf("\tStatut du tache : ");
+            	        scanf(" %[^\n]s",&tache[j].statut);
+            	        while(strcmp(tache[i].statut,"INCOMPLETE")!=0&&strcmp(tache[i].statut,"COMPLETE")!=0)
+	                    {
+		                    printf("\tStatut du tache (Complete/Incomplete): ");
+	                        scanf(" %[^\n]s",&tache[i].statut);
+	                    }
 			    		break;
 			    	default :
 			    		printf("CHOIX INVALID !! Ressayer..\n\n\n");
@@ -213,6 +241,7 @@ void OrdreCroissant(){
 		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
 		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
 		        strcpy(temp[0].priorite,tache[j].priorite);
+				strcpy(temp[0].statut,tache[j].statut);
 				
 				
 				tache[j].idTache=tache[k].idTache;
@@ -222,6 +251,8 @@ void OrdreCroissant(){
 		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
 		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
 		        strcpy(tache[j].priorite,tache[k].priorite);
+		        strcpy(tache[j].statut,tache[k].statut);
+		        
 		        
 		        tache[k].idTache=temp[0].idTache;
 		        strcpy(tache[k].responsable,temp[0].responsable);
@@ -230,6 +261,7 @@ void OrdreCroissant(){
 		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
 		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
 		        strcpy(tache[k].priorite,temp[0].priorite);
+		        strcpy(tache[k].statut,temp[0].statut);
 			}
 			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois>tache[k].dateEcheance.mois)
 			{
@@ -240,6 +272,7 @@ void OrdreCroissant(){
 		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
 		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
 		        strcpy(temp[0].priorite,tache[j].priorite);
+		        strcpy(temp[0].statut,tache[j].statut);
 				
 				
 				tache[j].idTache=tache[k].idTache;
@@ -249,6 +282,8 @@ void OrdreCroissant(){
 		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
 		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
 		        strcpy(tache[j].priorite,tache[k].priorite);
+		        strcpy(tache[j].statut,tache[k].statut);
+		        
 		        
 		        tache[k].idTache=temp[0].idTache;
 		        strcpy(tache[k].responsable,temp[0].responsable);
@@ -257,6 +292,7 @@ void OrdreCroissant(){
 		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
 		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
 		        strcpy(tache[k].priorite,temp[0].priorite);
+		        strcpy(tache[k].statut,temp[0].statut);
 			}
 			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois==tache[k].dateEcheance.mois&&tache[j].dateEcheance.jour>tache[k].dateEcheance.jour)
 			{
@@ -267,6 +303,7 @@ void OrdreCroissant(){
 		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
 		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
 		        strcpy(temp[0].priorite,tache[j].priorite);
+		        strcpy(temp[0].statut,tache[j].statut);
 				
 				
 				tache[j].idTache=tache[k].idTache;
@@ -276,6 +313,7 @@ void OrdreCroissant(){
 		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
 		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
 		        strcpy(tache[j].priorite,tache[k].priorite);
+		        strcpy(tache[j].statut,tache[k].statut);
 		        
 		        tache[k].idTache=temp[0].idTache;
 		        strcpy(tache[k].responsable,temp[0].responsable);
@@ -284,6 +322,7 @@ void OrdreCroissant(){
 		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
 		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
 		        strcpy(tache[k].priorite,temp[0].priorite);
+		        strcpy(tache[k].statut,temp[0].statut);
 			}
 		}
 	}
@@ -307,6 +346,7 @@ void OrdreDecroissant(){
 		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
 		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
 		        strcpy(temp[0].priorite,tache[j].priorite);
+		        strcpy(temp[0].statut,tache[j].statut);
 				
 				
 				tache[j].idTache=tache[k].idTache;
@@ -316,6 +356,8 @@ void OrdreDecroissant(){
 		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
 		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
 		        strcpy(tache[j].priorite,tache[k].priorite);
+		        strcpy(tache[j].statut,tache[k].statut);
+		        
 		        
 		        tache[k].idTache=temp[0].idTache;
 		        strcpy(tache[k].responsable,temp[0].responsable);
@@ -324,6 +366,7 @@ void OrdreDecroissant(){
 		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
 		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
 		        strcpy(tache[k].priorite,temp[0].priorite);
+		        strcpy(tache[k].statut,temp[0].statut);
 			}
 			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois<tache[k].dateEcheance.mois)
 			{
@@ -334,6 +377,7 @@ void OrdreDecroissant(){
 		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
 		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
 		        strcpy(temp[0].priorite,tache[j].priorite);
+		        strcpy(temp[0].statut,tache[j].statut);
 				
 				
 				tache[j].idTache=tache[k].idTache;
@@ -343,6 +387,7 @@ void OrdreDecroissant(){
 		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
 		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
 		        strcpy(tache[j].priorite,tache[k].priorite);
+		        strcpy(tache[j].statut,tache[k].statut);
 		        
 		        tache[k].idTache=temp[0].idTache;
 		        strcpy(tache[k].responsable,temp[0].responsable);
@@ -351,6 +396,7 @@ void OrdreDecroissant(){
 		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
 		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
 		        strcpy(tache[k].priorite,temp[0].priorite);
+		        strcpy(tache[k].statut,temp[0].statut);
 			}
 			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois==tache[k].dateEcheance.mois&&tache[j].dateEcheance.jour<tache[k].dateEcheance.jour)
 			{
@@ -361,6 +407,7 @@ void OrdreDecroissant(){
 		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
 		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
 		        strcpy(temp[0].priorite,tache[j].priorite);
+		        strcpy(temp[0].statut,tache[j].statut);
 				
 				
 				tache[j].idTache=tache[k].idTache;
@@ -370,6 +417,7 @@ void OrdreDecroissant(){
 		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
 		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
 		        strcpy(tache[j].priorite,tache[k].priorite);
+		        strcpy(tache[j].statut,tache[k].statut);
 		        
 		        tache[k].idTache=temp[0].idTache;
 		        strcpy(tache[k].responsable,temp[0].responsable);
@@ -378,6 +426,7 @@ void OrdreDecroissant(){
 		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
 		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
 		        strcpy(tache[k].priorite,temp[0].priorite);
+		        strcpy(tache[k].statut,temp[0].statut);
 			}
 		}
 	}
@@ -391,7 +440,8 @@ void Filtrertache(){
 	printf("\t2- Responsable .\n");
 	printf("\t3- Date d echeance .\n");
 	printf("\t4- Priorite .\n");
-	printf("\t5- Retourner au menu .\n");
+	printf("\t5- Statut .\n");
+	printf("\t6- Retourner au menu .\n");
     scanf("%d",&filtre);
 	switch(filtre)
 	{
@@ -408,6 +458,9 @@ void Filtrertache(){
 			FiltrePriorite();
 			break;
 		case 5:
+			FiltreStatut();
+			break;
+		case 6:
 			AfficherMenu();
 			break;
 		default :
@@ -433,6 +486,7 @@ void Filtreid(){
 		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
 		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
 		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
 		    k++;
 		}
 	}
@@ -453,6 +507,8 @@ void Filtreid(){
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
         printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
+	    printf("\t\tStatut du tache %d : ",Filtrage[j].idTache);
+	    printf(" %s\n",Filtrage[j].statut);
 	}
 	printf("\n\n\n\n");
 	AfficherMenu();	
@@ -475,6 +531,7 @@ void FiltreResponsable(){
 		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
 		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
 		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
 		    k++;
 		}
 	}
@@ -495,6 +552,8 @@ void FiltreResponsable(){
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
         printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
+	    printf("\t\tStatut du tache %d : ",Filtrage[j].idTache);
+	    printf(" %s\n",Filtrage[j].statut);
 	}
 	printf("\n\n\n\n");
 	AfficherMenu();	
@@ -523,6 +582,7 @@ void FiltreDateEcheance(){
 		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
 		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
 		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
 		    k++;
 		}
 		else if(tache[j].dateEcheance.annee==annee&&tache[j].dateEcheance.mois>mois)
@@ -534,6 +594,7 @@ void FiltreDateEcheance(){
 		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
 		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
 		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
 		    k++;
 		}
 		else if(tache[j].dateEcheance.annee==annee&&tache[j].dateEcheance.mois==mois&&tache[j].dateEcheance.jour>jour)
@@ -545,6 +606,7 @@ void FiltreDateEcheance(){
 		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
 		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
 		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
 		    k++;
 		}
 		else if(tache[j].dateEcheance.annee==annee&&tache[j].dateEcheance.mois==mois&&tache[j].dateEcheance.jour==jour)
@@ -556,6 +618,7 @@ void FiltreDateEcheance(){
 		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
 		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
 		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
 		    k++;
 		}
 	}
@@ -576,6 +639,8 @@ void FiltreDateEcheance(){
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
         printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
+	    printf("\t\tStatut du tache %d : ",Filtrage[j].idTache);
+	    printf(" %s\n",Filtrage[j].statut);
 	}
 	printf("\n\n\n");
 	AfficherMenu();	
@@ -600,6 +665,7 @@ void FiltrePriorite(){
 		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
 		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
 		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
 		    k++;
 		}
 	}
@@ -620,6 +686,55 @@ void FiltrePriorite(){
         printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
         printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
 	    printf(" %s\n",Filtrage[j].priorite);
+	    printf("\t\tStatut du tache %d : ",Filtrage[j].idTache);
+	    printf(" %s\n",Filtrage[j].statut);
+	}
+	printf("\n\n\n");
+	AfficherMenu();	
+}
+
+void FiltreStatut(){
+	int j,k=0;
+	char statutache[30];
+	printf("Statut du tache : ");
+	scanf(" %[^\n]s",&statutache);
+	
+	Tache Filtrage[i];
+	
+	for(j=0;j<i;j++)
+	{
+		if(strcmp(statutache,tache[j].statut)==0)
+		{
+			Filtrage[k].idTache=tache[j].idTache;
+		    strcpy(Filtrage[k].responsable,tache[j].responsable);
+		    strcpy(Filtrage[k].description,tache[j].description);
+		    Filtrage[k].dateEcheance.jour=tache[j].dateEcheance.jour;
+		    Filtrage[k].dateEcheance.mois=tache[j].dateEcheance.mois;
+		    Filtrage[k].dateEcheance.annee=tache[j].dateEcheance.annee;
+		    strcpy(Filtrage[k].priorite,tache[j].priorite);
+		    strcpy(Filtrage[k].statut,tache[j].statut);
+		    k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("Tache introuvable !! Ressayer.. \n\n\n");
+		Filtrertache();
+	}
+	for(j=0;j<k;j++){
+    	printf("\tTache %d :\n",j+1);
+    	printf("\t\tNumero du tache : ");
+        printf(" %d\n",Filtrage[j].idTache);
+        printf("\t\tResponsable du tache %d : ",Filtrage[j].idTache);
+        printf(" %s\n",Filtrage[j].responsable);
+        printf("\t\tDescription du tache %d : ",Filtrage[j].idTache);
+        printf(" %s\n",Filtrage[j].description);
+        printf("\t\tDate d' echeance du tache %d : ",Filtrage[j].idTache);
+        printf(" %d/%d/%d\n",Filtrage[j].dateEcheance.jour,Filtrage[j].dateEcheance.mois,Filtrage[j].dateEcheance.annee);
+        printf("\t\tLa priorite du tache %d : ",Filtrage[j].idTache);
+	    printf(" %s\n",Filtrage[j].priorite);
+	    printf("\t\tStatut du tache %d : ",Filtrage[j].idTache);
+	    printf(" %s\n",Filtrage[j].statut);
 	}
 	printf("\n\n\n");
 	AfficherMenu();	
@@ -685,6 +800,8 @@ void AfficherTaches(Tache t[]){
         printf(" %d/%d/%d\n",t[j].dateEcheance.jour,t[j].dateEcheance.mois,t[j].dateEcheance.annee);
         printf("\t\tLa priorite du tache %d : ",t[j].idTache);
 	    printf(" %s\n",t[j].priorite);
+	    printf("\t\tStatut du tache %d : ",t[j].idTache);
+	    printf(" %s\n",t[j].statut);
 	}
 	printf("\n\n\n");
 	AfficherMenu();	
