@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 
-int nombre;
+
 
 typedef struct{
 	int jour;
@@ -9,6 +11,7 @@ typedef struct{
 }date;
 
 typedef struct{
+	int  idTache ;
 	char responsable[20];
 	char description[30];
 	date dateEcheance;
@@ -19,12 +22,20 @@ void AfficherMenu();
 void ChoixOperation(int nombre);
 void AfficherTaches();
 void AjouterTache();
+void SupprimerTache();
 
-int i=0;
+
+
+
+int i=0,nombre;
 Tache tache[100];
+
+
+
 
 void AjouterTache()
 {   
+    tache[i].idTache=tache[i-1].idTache+1;
 	printf("\t Responsable du tache : ");
 	scanf(" %[^\n]s",&tache[i].responsable);
    
@@ -42,7 +53,46 @@ void AjouterTache()
 	AfficherMenu();
 }
 
-
+void SupprimerTache(){
+	
+	int nbrtache,j;
+	bool istach = false ;
+	
+	printf("Quelle tache voulez-vous supprimer ?\n");
+	scanf("%d",&nbrtache);
+	
+	while(nbrtache<0)
+	{
+		printf("Tache introuvable !! \n\n\n");
+		AfficherMenu();
+	}
+	
+	for(j=0;j<i;j++)
+	{
+		    if(tache[j].idTache==nbrtache)
+		    {
+			    istach=true;
+		    }
+		    if(istach==true)
+		    {
+			    tache[j].idTache=tache[j+1].idTache;
+		        strcpy(tache[j].responsable,tache[j+1].responsable);
+		        strcpy(tache[j].description,tache[j+1].description);
+		        tache[j].dateEcheance.jour=tache[j+1].dateEcheance.jour;
+		        tache[j].dateEcheance.mois=tache[j+1].dateEcheance.mois;
+		        tache[j].dateEcheance.annee=tache[j+1].dateEcheance.annee;
+		        strcpy(tache[j].priorite,tache[j+1].priorite);
+		   }	
+	}
+	if(istach==false)
+	{
+		printf("Tache introuvable !! Ressayer..\n\n\n");
+		SupprimerTache();
+	}
+	printf("La suppression est effectue avec succes !!\n\n");
+	i--;
+	AfficherMenu();
+}
 
 
 void ChoixOperation(int nombre)
@@ -55,13 +105,16 @@ void ChoixOperation(int nombre)
 	        AfficherTaches(tache);
 			break;
         case 3:
-	        printf("Modifier");
+	        ModifierTache();
 			break;
         case 4:
-		    printf("Supprimer");	
+		    SupprimerTache();	
 			break;
-        case 5:
-		    printf("Filtrer");	
+		case 5:
+		    TrierTaches();
+			break;
+        case 6:
+		    Filtrertache();	
 			break;
 		default:
 			printf("CHOIX INVALID !! Ressayer ..\n\n");
@@ -77,26 +130,30 @@ void AfficherMenu()
 	printf("\t2- Afficher la liste des taches .\n");
 	printf("\t3- Modifier une tache .\n");
 	printf("\t4- Supprimer une tache .\n");
-	printf("\t5- Filtrer les taches .\n");
+	printf("\t5- Trier les taches (Croissant / Decroissant).\n");
+	printf("\t6- Filtrer les taches .\n");
 	scanf("%d",&nombre);
 	ChoixOperation(nombre);
 }
 
 
-
 void AfficherTaches(Tache t[]){
+	
 	int j=0;
+	
 	
 	printf("Voila les taches disponible a ce moment la :\n\n");
     for(j=0;j<i;j++){
     	printf("Tache %d :\n",j+1);
-        printf("\t Responsable du tache %d : ",j+1);
+    	printf("\t Numero du tache : ");
+        printf(" %d\n",t[j].idTache);
+        printf("\t Responsable du tache %d : ",t[j].idTache);
         printf(" %s\n",t[j].responsable);
-        printf("\t Description du tache %d : ",j+1);
+        printf("\t Description du tache %d : ",t[j].idTache);
         printf(" %s\n",t[j].description);
-        printf("\t Date d' echeance du tache %d : ",j+1);
-        printf(" %d %d %d\n",t[j].dateEcheance.jour,t[j].dateEcheance.mois,t[j].dateEcheance.annee);
-        printf("\tLa priorite du tache %d : ",j+1);
+        printf("\t Date d' echeance du tache %d : ",t[j].idTache);
+        printf(" %d/%d/%d\n",t[j].dateEcheance.jour,t[j].dateEcheance.mois,t[j].dateEcheance.annee);
+        printf("\tLa priorite du tache %d : ",t[j].idTache);
 	    printf(" %s\n",t[j].priorite);
 	}
 	printf("\n\n\n\n");
