@@ -24,7 +24,9 @@ void AfficherTaches();
 void AjouterTache();
 void SupprimerTache();
 void ModifierTache();
-
+void TrierTaches();
+void OrdreCroissant();
+void OrdreDecroissant();
 
 
 int i=0,nombre;
@@ -152,6 +154,219 @@ void ModifierTache(){
 	printf("La Modification est effectue avec succes !!\n\n");
 	AfficherMenu();
 }
+
+void TrierTaches(){
+	int ordre;
+	printf("De Quelle ordre voulez- vous trier les taches ?\n");
+	
+	printf("\t1- Croissant .\n");
+    printf("\t2- Decroissant .\n");
+    
+	scanf("%d",&ordre);
+    
+	switch(ordre)
+	{
+		case 1 :
+			OrdreCroissant();
+			break;
+		case 2 :
+			OrdreDecroissant();
+			break;
+		default :
+			printf("CHOIX INVALID !! Ressayer..");
+    		TrierTaches();
+	   		break;
+	}
+}
+	
+void OrdreCroissant(){
+	int j,k;
+	for(j=0;j<i;j++)
+	{
+		for(k=j+1;k<i;k++)
+		{
+			Tache temp[1];
+			if(tache[j].dateEcheance.annee>tache[k].dateEcheance.annee)
+			{
+				temp[0].idTache=tache[j].idTache;
+		        strcpy(temp[0].responsable,tache[j].responsable);
+		        strcpy(temp[0].description,tache[j].description);
+		        temp[0].dateEcheance.jour=tache[j].dateEcheance.jour;
+		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
+		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
+		        strcpy(temp[0].priorite,tache[j].priorite);
+				
+				
+				tache[j].idTache=tache[k].idTache;
+		        strcpy(tache[j].responsable,tache[k].responsable);
+		        strcpy(tache[j].description,tache[k].description);
+		        tache[j].dateEcheance.jour=tache[k].dateEcheance.jour;
+		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
+		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
+		        strcpy(tache[j].priorite,tache[k].priorite);
+		        
+		        tache[k].idTache=temp[0].idTache;
+		        strcpy(tache[k].responsable,temp[0].responsable);
+		        strcpy(tache[k].description,temp[0].description);
+		        tache[k].dateEcheance.jour=temp[0].dateEcheance.jour;
+		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
+		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
+		        strcpy(tache[k].priorite,temp[0].priorite);
+			}
+			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois>tache[k].dateEcheance.mois)
+			{
+				temp[0].idTache=tache[j].idTache;
+		        strcpy(temp[0].responsable,tache[j].responsable);
+		        strcpy(temp[0].description,tache[j].description);
+		        temp[0].dateEcheance.jour=tache[j].dateEcheance.jour;
+		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
+		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
+		        strcpy(temp[0].priorite,tache[j].priorite);
+				
+				
+				tache[j].idTache=tache[k].idTache;
+		        strcpy(tache[j].responsable,tache[k].responsable);
+		        strcpy(tache[j].description,tache[k].description);
+		        tache[j].dateEcheance.jour=tache[k].dateEcheance.jour;
+		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
+		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
+		        strcpy(tache[j].priorite,tache[k].priorite);
+		        
+		        tache[k].idTache=temp[0].idTache;
+		        strcpy(tache[k].responsable,temp[0].responsable);
+		        strcpy(tache[k].description,temp[0].description);
+		        tache[k].dateEcheance.jour=temp[0].dateEcheance.jour;
+		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
+		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
+		        strcpy(tache[k].priorite,temp[0].priorite);
+			}
+			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois==tache[k].dateEcheance.mois&&tache[j].dateEcheance.jour>tache[k].dateEcheance.jour)
+			{
+				temp[0].idTache=tache[j].idTache;
+		        strcpy(temp[0].responsable,tache[j].responsable);
+		        strcpy(temp[0].description,tache[j].description);
+		        temp[0].dateEcheance.jour=tache[j].dateEcheance.jour;
+		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
+		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
+		        strcpy(temp[0].priorite,tache[j].priorite);
+				
+				
+				tache[j].idTache=tache[k].idTache;
+		        strcpy(tache[j].responsable,tache[k].responsable);
+		        strcpy(tache[j].description,tache[k].description);
+		        tache[j].dateEcheance.jour=tache[k].dateEcheance.jour;
+		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
+		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
+		        strcpy(tache[j].priorite,tache[k].priorite);
+		        
+		        tache[k].idTache=temp[0].idTache;
+		        strcpy(tache[k].responsable,temp[0].responsable);
+		        strcpy(tache[k].description,temp[0].description);
+		        tache[k].dateEcheance.jour=temp[0].dateEcheance.jour;
+		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
+		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
+		        strcpy(tache[k].priorite,temp[0].priorite);
+			}
+		}
+	}
+	AfficherTaches(tache);
+	    
+}
+void OrdreDecroissant(){
+	int j,k;
+	for(j=0;j<i;j++)
+	{
+		for(k=j+1;k<i;k++)
+		{
+			Tache temp[1];
+			if(tache[j].dateEcheance.annee<tache[k].dateEcheance.annee)
+			{
+				temp[0].idTache=tache[j].idTache;
+		        strcpy(temp[0].responsable,tache[j].responsable);
+		        strcpy(temp[0].description,tache[j].description);
+		        temp[0].dateEcheance.jour=tache[j].dateEcheance.jour;
+		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
+		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
+		        strcpy(temp[0].priorite,tache[j].priorite);
+				
+				
+				tache[j].idTache=tache[k].idTache;
+		        strcpy(tache[j].responsable,tache[k].responsable);
+		        strcpy(tache[j].description,tache[k].description);
+		        tache[j].dateEcheance.jour=tache[k].dateEcheance.jour;
+		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
+		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
+		        strcpy(tache[j].priorite,tache[k].priorite);
+		        
+		        tache[k].idTache=temp[0].idTache;
+		        strcpy(tache[k].responsable,temp[0].responsable);
+		        strcpy(tache[k].description,temp[0].description);
+		        tache[k].dateEcheance.jour=temp[0].dateEcheance.jour;
+		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
+		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
+		        strcpy(tache[k].priorite,temp[0].priorite);
+			}
+			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois<tache[k].dateEcheance.mois)
+			{
+				temp[0].idTache=tache[j].idTache;
+		        strcpy(temp[0].responsable,tache[j].responsable);
+		        strcpy(temp[0].description,tache[j].description);
+		        temp[0].dateEcheance.jour=tache[j].dateEcheance.jour;
+		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
+		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
+		        strcpy(temp[0].priorite,tache[j].priorite);
+				
+				
+				tache[j].idTache=tache[k].idTache;
+		        strcpy(tache[j].responsable,tache[k].responsable);
+		        strcpy(tache[j].description,tache[k].description);
+		        tache[j].dateEcheance.jour=tache[k].dateEcheance.jour;
+		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
+		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
+		        strcpy(tache[j].priorite,tache[k].priorite);
+		        
+		        tache[k].idTache=temp[0].idTache;
+		        strcpy(tache[k].responsable,temp[0].responsable);
+		        strcpy(tache[k].description,temp[0].description);
+		        tache[k].dateEcheance.jour=temp[0].dateEcheance.jour;
+		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
+		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
+		        strcpy(tache[k].priorite,temp[0].priorite);
+			}
+			else if(tache[j].dateEcheance.annee==tache[k].dateEcheance.annee&&tache[j].dateEcheance.mois==tache[k].dateEcheance.mois&&tache[j].dateEcheance.jour<tache[k].dateEcheance.jour)
+			{
+				temp[0].idTache=tache[j].idTache;
+		        strcpy(temp[0].responsable,tache[j].responsable);
+		        strcpy(temp[0].description,tache[j].description);
+		        temp[0].dateEcheance.jour=tache[j].dateEcheance.jour;
+		        temp[0].dateEcheance.mois=tache[j].dateEcheance.mois;
+		        temp[0].dateEcheance.annee=tache[j].dateEcheance.annee;
+		        strcpy(temp[0].priorite,tache[j].priorite);
+				
+				
+				tache[j].idTache=tache[k].idTache;
+		        strcpy(tache[j].responsable,tache[k].responsable);
+		        strcpy(tache[j].description,tache[k].description);
+		        tache[j].dateEcheance.jour=tache[k].dateEcheance.jour;
+		        tache[j].dateEcheance.mois=tache[k].dateEcheance.mois;
+		        tache[j].dateEcheance.annee=tache[k].dateEcheance.annee;
+		        strcpy(tache[j].priorite,tache[k].priorite);
+		        
+		        tache[k].idTache=temp[0].idTache;
+		        strcpy(tache[k].responsable,temp[0].responsable);
+		        strcpy(tache[k].description,temp[0].description);
+		        tache[k].dateEcheance.jour=temp[0].dateEcheance.jour;
+		        tache[k].dateEcheance.mois=temp[0].dateEcheance.mois;
+		        tache[k].dateEcheance.annee=temp[0].dateEcheance.annee;
+		        strcpy(tache[k].priorite,temp[0].priorite);
+			}
+		}
+	}
+	AfficherTaches(tache);
+}
+
+
+
 
 void ChoixOperation(int nombre)
 {
